@@ -1,0 +1,52 @@
+package Ejercicios;
+
+import Ejercicios.lista.ListaEncadenada;
+import Ejercicios.lista.Nodo;
+
+public class Main {
+
+    static ListaEncadenada<Integer> lista = new ListaEncadenada<>();
+
+    public static void main(String[] args) {
+            llenarLista();
+            lista.mostrar();
+    }
+
+    public static void llenarLista() {
+        for(int i=0;i<6;i++) {
+            int numero = (int) (Math.random() * 30);
+            if (lista.esVacia()) {
+                System.out.println("Lista vacia");
+                lista.agregarInicio(numero);
+            } else {
+                Nodo aux = lista.getInicio();
+                while (aux.getSiguiente() != null){
+                    Integer dato= (Integer) aux.getElemento();
+                    if((dato>numero && dato<numero){
+                        lista.agregarEntreNodo(numero,i);
+
+                    } else if(dato<numero){
+                        lista.agregarInicio(numero);
+                    } else{
+                        lista.agregarFinal(numero);
+                    }
+                }
+
+            }
+            numero=0;
+        }
+    }
+
+    public static int sumarParesImpares(){
+        Nodo aux = lista.getInicio();
+        while (aux.getSiguiente() != null){
+
+        }
+        return 0;
+    }
+
+    public static void borrarPares(){
+
+    }
+
+}
