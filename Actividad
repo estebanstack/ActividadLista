@@ -1,52 +1,105 @@
-package Ejercicios;
-
-import Ejercicios.lista.ListaEncadenada;
-import Ejercicios.lista.Nodo;
-
-public class Main {
+public class Ejercicio2 {
 
     static ListaEncadenada<Integer> lista = new ListaEncadenada<>();
 
     public static void main(String[] args) {
-            llenarLista();
-            lista.mostrar();
+        llenarLista();
+        lista.mostrar();
+        sumarParesEImpares();
+        lista.mostrar();
     }
 
     public static void llenarLista() {
         for(int i=0;i<6;i++) {
             int numero = (int) (Math.random() * 30);
+
             if (lista.esVacia()) {
-                System.out.println("Lista vacia");
+                System.out.println("Lista vacía, agregando el primer elemento.");
                 lista.agregarInicio(numero);
             } else {
                 Nodo aux = lista.getInicio();
-                while (aux.getSiguiente() != null){
-                    Integer dato= (Integer) aux.getElemento();
-                    if((dato>numero && dato<numero){
-                        lista.agregarEntreNodo(numero,i);
+                int indice = 0;
+                boolean agregado = false;
 
-                    } else if(dato<numero){
-                        lista.agregarInicio(numero);
-                    } else{
-                        lista.agregarFinal(numero);
+                while (aux != null) {
+                    Integer dato = (Integer) aux.getElemento();
+
+                    if (numero < dato) {
+                        lista.agregarEntreNodo(numero, indice);
+                        agregado = true;
+                        break;
                     }
+                    aux = aux.getSiguiente();
+                    indice++;
+                }
+                if (!agregado) {
+                    lista.agregarFinal(numero);
+                }
                 }
 
             }
-            numero=0;
-        }
-    }
 
-    public static int sumarParesImpares(){
+        }
+
+
+    public static void sumarParesEImpares() {
         Nodo aux = lista.getInicio();
-        while (aux.getSiguiente() != null){
+        int sumaPares = 0, sumaImpares = 0;
 
+        while (aux != null) {
+            Integer dato = (Integer) aux.getElemento();
+            Nodo siguiente = aux.getSiguiente();
+
+            if (dato % 2 == 0) {
+                sumaPares += dato;
+            }
+            else {
+                sumaImpares += dato;
+            }
+            aux = siguiente;
         }
-        return 0;
+        System.out.println("Suma de pares: " + sumaPares);
+        System.out.println("Suma de impares: " + sumaImpares);
+
+        if(sumaPares!=sumaImpares){
+            borrarPares();
+        } else {
+            borrarImpares();
+        }
+
     }
 
     public static void borrarPares(){
+        Nodo aux = lista.getInicio();
+        int indice=0;
+        while (aux != null){
+            Integer dato= (Integer) aux.getElemento();
+            Nodo siguiente=aux.getSiguiente();
+            if(dato%2==0){
+                lista.borrar(indice);
+            }else{
+                indice++;
+            }
+            aux=siguiente;
+        }
+    }
+
+    public static void borrarImpares(){
+        Nodo aux = lista.getInicio();
+        int indice=0,sumaPares=0;
+        while (aux != null){
+            Integer dato= (Integer) aux.getElemento();
+            Nodo siguiente=aux.getSiguiente();
+            if(dato%2!=0){
+                lista.borrar(indice);
+
+            }else{
+                indice++;
+            }
+            aux=siguiente;
+        }
 
     }
 
+}
 }
